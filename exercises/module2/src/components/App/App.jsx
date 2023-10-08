@@ -21,12 +21,16 @@ const App = () => {
     setCounter(0)
   }
 
+  const changeCount = (delta) => {
+    setCounter(counter + delta)
+  }
+
   return (
     <div>
       <Display counter={counter} />
-      <Button handleClick={increaseByOne} text="plus" />
-      <Button handleClick={setToZero} text="zero" />
-      <Button handleClick={decreaseByOne} text="minus" />
+      <Button changeCount={changeCount} text="plus" delta={1} />
+      <Button changeCount={changeCount} text="zero" delta={-counter}/>
+      <Button changeCount={changeCount} text="minus" delta={-1} />
     </div>
   )
 } 

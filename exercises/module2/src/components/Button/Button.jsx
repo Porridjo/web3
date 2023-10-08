@@ -1,7 +1,13 @@
-const Button = (props) => {
+const Button = ({ changeCount, text, delta }) => {
+  const handleClick = (e) => {
+    const deltaAttribute = e.target.dataset.delta
+    const delta = parseInt(deltaAttribute)
+    changeCount(delta)
+  }
+
   return (
-    <button onClick={props.handleClick}>
-      {props.text}
+    <button onClick={handleClick} data-delta={delta}>
+      {text}
     </button>
   )
 }
