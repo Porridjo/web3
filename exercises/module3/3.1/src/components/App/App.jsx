@@ -19,7 +19,7 @@ const App = () => {
   setTimeout(() => setLoading(false), 3000)
 
   if (loading) return <Loading />
-
+  
   return (
     <div>
       <h2>give feedback</h2>
