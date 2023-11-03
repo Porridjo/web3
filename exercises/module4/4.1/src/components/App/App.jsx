@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import 'components/App/App.css'
 import Person from 'components/Person/Person'
+import personsService from 'services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -10,11 +10,11 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect');
-    axios
-      .get('http://localhost:3001/persons')
+    personsService
+      .getAll()
       .then(response => {
         console.log('promised fulfilled');
-        setPersons(response.data)
+        setPersons(response)
       })
   }, [])
   console.log('render', persons.length, 'persons');
@@ -29,7 +29,11 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      setPersons(persons.concat(personObject))
+      personsService
+        .create(personObject)
+        .then(response => {
+          setPersons(persons.concat(response))
+        })
       setNewName('')
       setNewNumber('')
     }
