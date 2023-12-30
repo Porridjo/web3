@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input, Button } from 'antd';
+import { Input, Button, Form } from 'antd';
 
 const CreateNew = (props) => {
   const [content, setContent] = useState('')
@@ -17,25 +17,58 @@ const CreateNew = (props) => {
     })
   }
 
+  const onFinish = (values) => {
+    props.addNew({
+      ...values,
+      votes: 0
+    })
+  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <Form name="newAnecdote" onFinish={onFinish}>
         
-        <div>
-          content
-          <Input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          author
-          <Input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          url for more info
-          <Input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
-        </div>
-        <Button type="Primary" htmlType="submit">Primary Button</Button>
-      </form>
+        <Form.Item
+          label="content"
+          name="content"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your content'
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="author"
+          name="author"
+          rules={[
+            {
+              required: true,
+              message: 'Please input an author'
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="url for more info"
+          name="info"
+          rules={[
+            {
+              required: true,
+              message: 'Please input an url'
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">create</Button>
+        </Form.Item>  
+      </Form>
     </div>
   )
 
