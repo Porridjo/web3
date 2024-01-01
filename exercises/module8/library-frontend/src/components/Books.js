@@ -12,8 +12,6 @@ const Books = (props) => {
     return <div>loading...</div>
   }
 
-  const books = []
-
   return (
     <div>
       <h2>books</h2>

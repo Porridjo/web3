@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 const ALL_AUTHORS = gql`
   query {
@@ -38,8 +38,18 @@ const CREATE_BOOK = gql`
   }
 `
 
+const EDIT_AUTHOR = gql`
+  mutation EditAuthor($name: String!, $setBornTo: Int!) {
+    editAuthor (
+      name: $name
+      setBornTo: $setBornTo
+    )
+  }: Author
+`
+
 export {
   ALL_AUTHORS,
   ALL_BOOKS,
-  CREATE_BOOK
+  CREATE_BOOK,
+  EDIT_AUTHOR
 }
